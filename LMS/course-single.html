@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demos.codexcoder.com/labartisan/html/edukon/course-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Oct 2023 14:02:58 GMT -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAST Learning Management System</title>
+    <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/icofont.min.css">
+    <link rel="stylesheet" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/lightcase.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ending here -->
+
+
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop"><i class="icofont-rounded-up"></i></a>
+    <!-- scrollToTop ending here -->
+
+
+    <!-- header section start here -->
+    <header class="header-section header-shadow">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-area">
+                    <ul class="lab-ul left">
+                        <li>
+                            <i class="icofont-ui-call"></i> <span>+800-123-4567 6587</span>
+                        </li>
+                        <li>
+                            <i class="icofont-location-pin"></i> Beverley, New York 224 USA
+                        </li>
+                    </ul>
+                    <ul class="lab-ul social-icons d-flex align-items-center">
+                        <li>
+                            <p>Find us on : </p>
+                        </li>
+                        <li><a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="icofont-twitter"></i></a></li>
+                        <li><a href="#" class="vimeo"><i class="icofont-vimeo"></i></a></li>
+                        <li><a href="#" class="skype"><i class="icofont-skype"></i></a></li>
+                        <li><a href="#" class="rss"><i class="icofont-rss-feed"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/images/logo/01.png" alt="logo"></a>
+                    </div>
+                    <div class="menu-area">
+                        <div class="menu" id="menu-container">
+
+                            <script>
+                                const user = localStorage.getItem("role");
+                                const menucontainer = document.getElementById('menu-container');
+                                const html = `
+                                
+                            <ul class="lab-ul">
+                                <li>
+                                    <a href="index.html">Home</a>
+                                    
+                                </li>
+                                
+                                <li>
+                                    ${user === "Admin" ? '<li><a href="admincourse.html">Course Panel</a></li>' : '<li><a href="course.html">Courses</a></li>'}
+                                    
+                                </li>
+                                <li>
+                                    ${user === "teacher" ? '<li><a href="teacherprofile.html">Profile</a></li>' : ''}
+                                </li>
+                                <li>
+                                    ${user === "student" ? '<li><a href="studentprofile.html">Profile</a></li>' : ''}
+                                </li>
+                                
+                                    
+                                    ${user === "Admin" ? '<li><a href="admin.html">Admin Panel</a></li>' : ''}
+                                    
+                                
+                                <li>
+                                    <a href="team.html">Team</a>
+                                    
+                                </li>
+                                ${user !== "Admin" ? '<li><a href="contact.html">Contact</a></li>' : ''}
+                            </ul>
+                        
+                            `
+                                menucontainer.innerHTML += html;
+                            </script>
+                        </div>
+
+                        <div id="log-btn">
+                            <script>
+                                const log = document.getElementById('log-btn');
+                                const userr = localStorage.getItem("role");
+                                const bhtml = `
+                                
+                                
+
+                                ${!userr ? '<a href="login.html" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>' : ''}
+                                ${!userr ? '<a href="signup.html" class="signup"><i class="icofont-users"></i><span>SIGN UP</span> </a>' : ''}
+                                ${userr === "Admin" || userr === "student" || userr === "teacher" ? '<button class="logout icofont-user"><span>Logout</span></button>' : ''}
+                                `
+                                log.innerHTML += bhtml;
+                                const btn = document.querySelector('.logout');
+                                btn.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    localStorage.clear();
+                                    alert("logged out Successfully");
+                                    window.location.href = "index.html";
+                                })
+
+
+                            </script>
+                        </div>
+
+                        <!-- toggle icons -->
+                        <div class="header-bar d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="ellepsis-bar d-lg-none">
+                            <i class="icofont-info-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header section ending here -->
+
+
+    <!-- Page Header section start here -->
+    <div class="pageheader-section style-2">
+        <div class="container">
+            <div class="row justify-content-center justify-content-lg-between align-items-center flex-row-reverse">
+                <div class="col-lg-7 col-12">
+                    <div class="pageheader-thumb">
+                        <img src="" alt="rajibraj91" class="w-100" id="thumbnail">
+                    </div>
+                </div>
+                <div class="col-lg-5 col-12">
+                    <div class="pageheader-content">
+                        <div class="course-category">
+                            <a href="#" class="course-cate" id="category-id"></a>
+
+                        </div>
+                        <h2 class="phs-title" id="course-title">A</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header section ending here -->
+
+
+    <!-- course section start here -->
+    <div class="course-single-section padding-tb section-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="main-part">
+                        <div class="course-item">
+                            <div class="course-inner">
+                                <div class="course-content">
+                                    <h3>Course Overview</h3>
+                                    <p id="course-description">In this course take you from the fundamentals and
+                                        concepts of data modeling all the way through anumber of best practices and
+                                        techniques that you’ll need to build data models in your organization. You’ll
+                                        find many By the end of the course, you’ll be all set to not only put these
+                                        principles to works but also to maike the key data modeling and design decisions
+                                        required by the info data modeling that transcend the nuts-and-bolts that
+                                        clearly the key covered the course and design patterns.</p>
+                                    <h4>What You'll Learn in This Course:</h4>
+                                    <ul class="lab-ul">
+                                        <li><i class="icofont-tick-mark"></i>Ready to begin working on real-world data
+                                            modeling projects</li>
+                                        <li><i class="icofont-tick-mark"></i>Expanded responsibilities as part of an
+                                            existing role</li>
+                                        <li><i class="icofont-tick-mark"></i>Be able to create Flyers, Brochures,
+                                            Advertisements</li>
+                                        <li><i class="icofont-tick-mark"></i>Find a new position involving data
+                                            modeling.</li>
+                                        <li><i class="icofont-tick-mark"></i>Work with color and Gradients and Grids
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-video" id="module">
+                            <div class="course-video-title">
+                                <h4>Course Content</h4>
+                            </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    // Extract course ID from the URL
+                                    const urlParams = new URLSearchParams(window.location.search);
+                                    const courseId = urlParams.get('courseid');
+                                    localStorage.setItem("courseid", courseId);
+                                    const sid = localStorage.getItem("studentid");
+                                    const cid = localStorage.getItem("courseid");
+
+
+                                    // Fetch course details based on the ID
+                                    fetch(`http://localhost:5500/course/getmodule/${courseId}`)
+                                        .then(response => response.json())
+                                        .then(modules => {
+                                            fetch(`http://localhost:5500/registration/access/${sid}/${cid}`)
+                                                .then(acc => acc.json())
+                                                .then(access => {
+                                                    localStorage.setItem("access", access);
+                                                    const modulecontainer = document.getElementById('module');
+                                                    // console.log(modules);
+                                                    //iterate over module and generate HTML dynamically
+                                                    const fetchandrender = modules.map(singlemodule => {
+
+                                                        const moduleHTML =
+                                                            `<div class="course-video-content">
+                                                        <div class="accordion" id="accordionExample">
+                                                            <div class="accordion-item">
+                                                                    
+                                                                <div id="videolist1" class="accordion-collapse collapse show" aria-labelledby="accordion01" data-bs-parent="#accordionExample">
+                                                                    <ul class="lab-ul video-item-list">
+                                                                        <hr>
+                                                                        <li class=" d-flex flex-wrap justify-content-between" style="background-color: #ff5500;color: white;border-radius: 13px;">
+                                                                            <div class="video-item-title">${singlemodule.Orderr}.${singlemodule.Title}</div>
+                                                                            
+                                                                            
+                                                                            ${localStorage.getItem("access") === "yes" ? `<div class="video-item-icon"><a href="${singlemodule.Content}" target="_blank" onclick="active" data-rel="lightcase"><i class="icofont-play-alt-2" ></i></a></div>` :" "}
+                                                                                
+
+
+
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                `;
+                                                        modulecontainer.innerHTML += moduleHTML;
+                                                    })
+                                                });
+
+                                        });
+                                });
+
+
+
+                            </script>
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="authors">
+
+                            <div class="author-content">
+                                <h5 id="teacher"></h5>
+                                <span>Assistant Professor</span>
+
+                                <ul class="lab-ul social-icons">
+                                    <li>
+                                        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="pinterest"><i class="icofont-pinterest"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar-part">
+                        <div class="course-side-detail">
+                            <div class="csd-title">
+
+                                <div class="csdt-right">
+                                    <p class="mb-0"><i class="icofont-clock-time"></i>Limited time offer</p>
+                                </div>
+                            </div>
+                            <div class="csd-content">
+                                <div class="csdc-lists">
+                                    <ul class="lab-ul">
+                                        <li>
+                                            <div class="csdc-left"><i class="icofont-ui-alarm"></i>Course level</div>
+                                            <div class="csdc-right" id="level">Beginner</div>
+                                        </li>
+                                        <li>
+                                            <div class="csdc-left"><i class="icofont-book-alt"></i>Course Duration</div>
+                                            <div class="csdc-right" id="duration"></div>
+                                        </li>
+                                        <li>
+                                            <div class="csdc-left"><i class="icofont-video-alt"></i>Lessions</div>
+                                            <div class="csdc-right" id="modcount"></div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="course-enroll">
+                                    <button class="lab-btn" id="enrollButton" type="submit"><span>Enroll
+                                            Now</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+
+                            const users = localStorage.getItem("role");
+                            const ebutton = document.querySelector("#enrollButton");
+                            ebutton.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                if (users == "student") {
+
+                                    var obj = {
+                                        studentid: localStorage.getItem("studentid"),
+                                        courseid: localStorage.getItem("courseid")
+                                    };
+                                    fetch("http://localhost:5500/registration/newenrollnment", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-type": "application/json"
+                                        },
+                                        body: JSON.stringify(obj)
+                                    }).then((data) => data.json())
+                                        .then((data) => {
+                                            alert(data);
+                                            window.location.href=`course-single.html?courseid=${localStorage.getItem('courseid')}`;
+
+                                        });
+
+                                }
+                                else {
+                                    alert("You have to login as a student to enoll in this course");
+                                    window.location.href=`course-single.html?courseid=${localStorage.getItem('courseid')}`;
+
+                                }
+                            })
+
+
+                        </script>
+
+                        <div class="course-side-cetagory">
+                            <div class="csc-title">
+                                <h5 class="mb-0">Course Categories</h5>
+                            </div>
+                            <div class="csc-content" id="categorycontainer">
+
+
+
+
+                                <script>
+
+                                    fetch('http://localhost:5500/course/allcategory')
+                                        .then(response => response.json())
+                                        .then(category => {
+                                            const fetchAndRender = category.map(cate => {
+                                                return fetch(`http://localhost:5500/course/countcourse/${cate.CategoryID}`)
+                                                    .then(count => count.json())
+                                                    .then(coursecount => {
+                                                        const categoryhtml = `
+                                                    <div class="csdc-lists">
+                                                    <ul class="lab-ul">
+                                                        <li>
+                                                            <div class="csdc-left">${cate.Category_Name}</div>
+                                                            <div class="csdc-right">${coursecount[0].COUNT}</div>
+                                                            
+                                                        </li>
+                                                    </ul>
+                                                    </div>
+                                                    `;
+                                                        categorycontainer.innerHTML += categoryhtml;
+
+                                                    })
+                                            })
+
+                                        })
+                                        .catch(error => {
+                                            console.error('Error fetching course data:', error);
+                                        });
+
+                                </script>
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Extract course ID from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('courseid');
+
+
+            // Fetch course details based on the ID
+            fetch(`http://localhost:5500/course/getcourse/${courseId}`)
+                .then(response => response.json())
+                .then(course => {
+                    // Update the course details on the page
+
+                    document.getElementById('course-title').innerText = course[0].Course_title;
+                    document.getElementById('course-description').innerText = course[0].Description;
+                    document.getElementById('level').innerText = course[0].Course_level;
+                    document.getElementById('duration').innerText = course[0].Duration;
+                    document.getElementById('thumbnail').src = course[0].thumbnail;
+                    fetch(`http://localhost:5500/course/getcategory/${course[0].Category_ID}`)
+                        .then(res => res.json())
+                        .then(cat => {
+                            document.getElementById('category-id').innerText = cat[0].CATEGORY_NAME;
+                            fetch(`http://localhost:5500/teacher/getteacher/${course[0].TeacherID}`)
+                                .then(tres => tres.json())
+                                .then(tt => {
+                                    document.getElementById('teacher').innerText = tt[0].TEACHERNAME;
+                                    fetch(`http://localhost:5500/course/countmodule/${courseId}`)
+                                        .then(modcount => modcount.json())
+                                        .then(mod => {
+
+                                            document.getElementById('modcount').innerText = mod[0].COUNT;
+                                        })
+                                })
+
+                        })
+                        .catch(error => {
+                            console.error('Error fetching course details:', error);
+                        });
+                });
+
+        });
+    </script>
+
+    <!-- course section ending here -->
+
+
+    <!-- footer -->
+    <div class="news-footer-wrap">
+        <div class="fs-shape">
+            <img src="assets/images/shape-img/03.png" alt="fst" class="fst-1">
+            <img src="assets/images/shape-img/04.png" alt="fst" class="fst-2">
+        </div>
+        <!-- Newsletter Section Start Here -->
+        <div class="news-letter">
+            <div class="container">
+                <div class="section-wrapper">
+                    <div class="news-title">
+                        <h3>Want Us To Email You About Special Offers And Updates?</h3>
+                    </div>
+                    <div class="news-form">
+                        <form action="https://demos.codexcoder.com/">
+                            <div class="nf-list">
+                                <input type="email" name="email" placeholder="Enter Your Email">
+                                <input type="submit" name="submit" value="Subscribe Now">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Newsletter Section Ending Here -->
+
+        <!-- Footer Section Start Here -->
+        <footer>
+            <div class="footer-top padding-tb pt-0">
+                <div class="container">
+                    <div class="row g-4 row-cols-xl-4 row-cols-md-2 row-cols-1 justify-content-center">
+                        <div class="col">
+                            <div class="footer-item">
+                                <div class="footer-inner">
+                                    <div class="footer-content">
+                                        <div class="title">
+                                            <h4>Site Map</h4>
+                                        </div>
+                                        <div class="content">
+                                            <ul class="lab-ul">
+                                                <li><a href="#">Documentation</a></li>
+                                                <li><a href="#">Feedback</a></li>
+                                                <li><a href="#">Plugins</a></li>
+                                                <li><a href="#">Support Forums</a></li>
+                                                <li><a href="#">Themes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="footer-item">
+                                <div class="footer-inner">
+                                    <div class="footer-content">
+                                        <div class="title">
+                                            <h4>Useful Links</h4>
+                                        </div>
+                                        <div class="content">
+                                            <ul class="lab-ul">
+                                                <li><a href="#">About Us</a></li>
+                                                <li><a href="#">Help Link</a></li>
+                                                <li><a href="#">Terms & Conditions</a></li>
+                                                <li><a href="#">Contact Us</a></li>
+                                                <li><a href="#">Privacy Policy</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="footer-item">
+                                <div class="footer-inner">
+                                    <div class="footer-content">
+                                        <div class="title">
+                                            <h4>Social Contact</h4>
+                                        </div>
+                                        <div class="content">
+                                            <ul class="lab-ul">
+                                                <li><a href="#">Facebook</a></li>
+                                                <li><a href="#">Twitter</a></li>
+                                                <li><a href="#">Instagram</a></li>
+                                                <li><a href="#">YouTube</a></li>
+                                                <li><a href="#">Github</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="footer-item">
+                                <div class="footer-inner">
+                                    <div class="footer-content">
+                                        <div class="title">
+                                            <h4>Our Support</h4>
+                                        </div>
+                                        <div class="content">
+                                            <ul class="lab-ul">
+                                                <li><a href="#">Help Center</a></li>
+                                                <li><a href="#">Paid with Mollie</a></li>
+                                                <li><a href="#">Status</a></li>
+                                                <li><a href="#">Changelog</a></li>
+                                                <li><a href="#">Contact Support</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom style-2">
+                <div class="container">
+                    <div class="section-wrapper">
+                        <p>&copy; 2023 <a href="index.html">FAST LMS</a> Designed by <a
+                                href="https://www.behance.net/sufyanabdulr" target="_blank">Muhammad Sufyan</a> </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Section Ending Here -->
+    </div>
+    <!-- footer -->
+
+
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/swiper.min.js"></script>
+    <script src="assets/js/progress.js"></script>
+    <script src="assets/js/lightcase.js"></script>
+    <script src="assets/js/counter-up.js"></script>
+    <script src="assets/js/isotope.pkgd.js"></script>
+    <script src="assets/js/functions.js"></script>
+</body>
+
+<!-- Mirrored from demos.codexcoder.com/labartisan/html/edukon/course-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Oct 2023 14:03:00 GMT -->
+
+</html>

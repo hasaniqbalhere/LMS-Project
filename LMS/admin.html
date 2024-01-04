@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAST Learning Management System</title>
+    <link rel="shortcut icon" href="assets/images/x-icon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/icofont.min.css">
+    <link rel="stylesheet" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/lightcase.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header class="header-section header-shadow">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-area">
+                    <ul class="lab-ul left">
+                        <li>
+                            <i class="icofont-ui-call"></i> <span>+800-123-4567 6587</span>
+                        </li>
+                        <li>
+                            <i class="icofont-location-pin"></i> Beverley, New York 224 USA
+                        </li>
+                    </ul>
+                    <ul class="lab-ul social-icons d-flex align-items-center">
+                        <li>
+                            <p>Find us on : </p>
+                        </li>
+                        <li><a href="#" class="fb"><i class="icofont-facebook-messenger"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="icofont-twitter"></i></a></li>
+                        <li><a href="#" class="vimeo"><i class="icofont-vimeo"></i></a></li>
+                        <li><a href="#" class="skype"><i class="icofont-skype"></i></a></li>
+                        <li><a href="#" class="rss"><i class="icofont-rss-feed"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/images/logo/01.png" alt="logo"></a>
+                    </div>
+                    <div class="menu-area">
+                        <div class="menu" id="menu-container">
+
+                            <script>
+                                const user = localStorage.getItem("role");
+                                const menucontainer = document.getElementById('menu-container');
+                                const html = `
+                                
+                            <ul class="lab-ul">
+                                <li>
+                                    <a href="index.html">Home</a>
+                                    
+                                </li>
+                                
+                                <li>
+                                    ${user === "Admin" ? '<li><a href="admincourse.html">Course Panel</a></li>' : '<li><a href="course.html">Courses</a></li>'}
+                                    
+                                </li>
+                                <li>
+                                    ${user === "teacher" ? '<li><a href="teacherprofile.html">Profile</a></li>' : ''}
+                                </li>
+                                <li>
+                                    ${user === "Admin" ? '<li><a href="submission.html">Submission</a></li>' : ''}
+                                </li>
+                                
+                                    
+                                    ${user === "teacher" ? '<li><a href="insertcourse.html">Teacher Panel</a></li>' : ''}
+                                    
+                                
+                                <li>
+                                    <a href="team.html">Team</a>
+                                    
+                                </li>
+                                
+                            </ul>
+                        
+                            `
+                                menucontainer.innerHTML += html;
+                            </script>
+                        </div>
+
+                        <div id="log-btn">
+                            <script>
+                                const log = document.getElementById('log-btn');
+                                const userr = localStorage.getItem("role");
+                                const bhtml = `
+                                
+                                
+
+                                ${!userr ? '<a href="login.html" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>' : ''}
+                                ${!userr ? '<a href="signup.html" class="signup"><i class="icofont-users"></i><span>SIGN UP</span> </a>' : ''}
+                                ${userr === "Admin" || userr === "student" || userr === "teacher" ? '<button class="logout icofont-user"><span>Logout</span></button>' : ''}
+                                `
+                                log.innerHTML += bhtml;
+                                const btn = document.querySelector('.logout');
+                                btn.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    localStorage.clear();
+                                    alert("logged out Successfully");
+                                    window.location.href = "index.html";
+                                })
+
+
+                            </script>
+                        </div>
+
+                        <!-- toggle icons -->
+                        <div class="header-bar d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="ellepsis-bar d-lg-none">
+                            <i class="icofont-info-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header section ending here -->
+    <div class="pageheader-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="pageheader-content text-center">
+                        <h2>ADMIN PANEL</h2>
+                        <div>
+                            <h1 class="pageheader-content text-center" id="Profilename">name</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <br><br><br>
+        <h3 class="pageheader-content text-center">ALL USERS</h3>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">User Type</th>
+                    </tr>
+                </thead>
+                <tbody id="coursesBody"></tbody>
+            </table>
+            <script>
+                const name = localStorage.getItem('name');
+                document.getElementById('Profilename').innerText = name;
+                const coursesBody = document.getElementById('coursesBody'); // Get the tbody element
+
+                fetch(`http://localhost:5500/user`)
+                    .then(res => res.json())
+                    .then(response => {
+                        const fetchAndRender = response.map(user => {
+                            console.log(user);
+                            const tablehtml = `
+                                <tr>
+                                    <th scope="row">${user.UserID}</th>
+                                    <td>${user.Username}</td>
+                                    <td>${user.Email}</td>
+                                    <td>${user.Password}</td>
+                                    <td>${user.Usertype}</td>
+                                    <td><button class="icofont-user del-user" data-userid="${user.UserID}"><span>Delete</span></button></td>
+                                </tr>
+                            `;
+                            coursesBody.innerHTML += tablehtml;
+                        });
+
+                        // Add event listener to each delete button
+                        const deleteButtons = document.querySelectorAll('.del-user');
+                        deleteButtons.forEach(button => {
+                            button.addEventListener("click", (e) => {
+                                e.preventDefault();
+                                const userIdToDelete = button.dataset.userid;
+                                // Ask for confirmation before deleting
+                                const confirmDelete = confirm(`Are you sure you want to delete user with ID: ${userIdToDelete}?`);
+                                if (confirmDelete){
+                                    fetch(`http://localhost:5500/user/deleteuser/${userIdToDelete}`, {
+                                        method: "DELETE",
+                                        headers: {
+                                            "Content-type": "application/json"
+                                        },
+                                    }).then((data) => data.json()).then((data) => {
+                                        alert(data);
+                                        window.location.href = "admin.html";
+                                    });
+                                    console.log(`Delete user with ID: ${userIdToDelete}`);
+                                    // Add your delete logic here
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching user data:', error);
+                    });
+            </script>
+
+        </div>
+
+
+        
+    </div>
+
+    <div>
+        <br><br><br>
+        <h3 class="pageheader-content text-center">ALL Categories</h3>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Cateory ID</th>
+                        <th scope="col">Cateory Name</th>
+                    </tr>
+                </thead>
+                <tbody id="categoryBody"></tbody>
+            </table>
+            <script>
+                const categoryBody = document.getElementById('categoryBody'); // Get the tbody element
+
+                fetch(`http://localhost:5500/course/allcategory`)
+                    .then(res => res.json())
+                    .then(response => {
+                        const fetchAndRender = response.map(user => {
+                            console.log(user);
+                            const tablehtml = `
+                                <tr>
+                                    <th scope="row">${user.CategoryID}</th>
+                                    <td>${user.Category_Name}</td>
+                                    <td><button class="icofont-user del-cat" data-catid="${user.Category_Name}"><span>Delete</span></button></td>
+                                </tr>
+                            `;
+                            categoryBody.innerHTML += tablehtml;
+                        });
+
+                        // Add event listener to each delete button
+                        const deleteButtons = document.querySelectorAll('.del-cat');
+                        deleteButtons.forEach(button => {
+                            button.addEventListener("click", (e) => {
+                                e.preventDefault();
+                                const userIdToDelete = button.dataset.catid;
+                                // Ask for confirmation before deleting
+                                const confirmDelete = confirm(`Are you sure you want to delete category with ID: ${userIdToDelete}?`);
+                                if (confirmDelete){
+                                    fetch(`http://localhost:5500/course/delcategory/${userIdToDelete}`, {
+                                        method: "DELETE",
+                                        headers: {
+                                            "Content-type": "application/json"
+                                        },
+                                    }).then((data) => data.json()).then((data) => {
+                                        alert(data);
+                                        window.location.href = "admin.html";
+                                    });
+                                    console.log(`Delete category with ID: ${userIdToDelete}`);
+                                    // Add your delete logic here
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching user data:', error);
+                    });
+            </script>
+
+        </div>
+
+
+        
+    </div>
+
+
+
+
+    <div class="container">
+        <h4 class="text-center">Add New Category</h4>
+        <form action="add-course" id="add-course">
+            <input type="text" placeholder="Enter Category Name" name="category" class="category" id="category"><br>
+            <button class="addcategory">Add Category</button>
+        </form>
+    </div>
+
+    <script>
+        
+        const mycategory = document.querySelector(".category");
+        const cbutton = document.querySelector(".addcategory");
+        cbutton.addEventListener("click", (a) => {
+            a.preventDefault();
+            var obj = {
+                category_name: mycategory.value,
+            };
+
+
+
+            fetch("http://localhost:5500/course/addcategory", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(data => data.json())
+                .then(data => {
+                    alert(data);
+                    window.location.href = "admin.html";
+                })
+
+        })
+    </script>
+
+<div class="footer-bottom style-2">
+    <div class="container">
+        <div class="section-wrapper">
+            <p>&copy; 2023 <a href="index.html">FAST LMS</a> Designed by <a href="https://www.behance.net/sufyanabdulr"
+                    target="_blank">Muhammad Sufyan</a> </p>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
