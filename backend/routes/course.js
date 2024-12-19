@@ -18,9 +18,6 @@ router.get("/countcourse/:id",coursecount);
 router.get("/admincourse",admincourses)
 
 
-
-
-
 ////creating modules of courses
 router.post("/addmodule",createmodule);
 router.put("/updatemodule",updateModule);
